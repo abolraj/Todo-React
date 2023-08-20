@@ -15,30 +15,64 @@ function App() {
   #bootstrap
   #html
   #css
-  #js
-  `;
+  #js`;
 
-  const log = (text, interval=200,clear=false, isEnded) => {
+  const log = (orgText, interval=200,clear=false, isEnded=null, cleanInterval=100) => {
     let i = 0
+    let selector = ''
+  
+    let text = orgText instanceof Array ? orgText.shift() : orgText
+    
+    if(text === undefined)return
+
+    const nIsEnded = ()=>{
+      clearInterval(selectorInterId)
+      clearInterval(interId)
+
+      setLabel('')
+      console.log('ended !')
+      log(orgText, interval,clear, isEnded, cleanInterval)
+      isEnded && isEnded()
+    }
+    const selectorInterId = setInterval(() => {
+      selector = selector ? '' : '|'
+    }, 300);
     const interId = setInterval(() => {
       if(i>text.length){
         clearInterval(interId)
-        if(clear)
-          setLabel('')
-        isEnded()
+        if(clear){
+          const cleanInterId = setInterval(()=>{
+            if(i<0){
+              clearInterval(cleanInterId)
+              nIsEnded()
+              return
+            }
+            setLabel(text.substring(0,i)+selector)
+            i--     
+          }, cleanInterval)
+          
+        } else nIsEnded()
+
         return
       }
-      setLabel(text.substring(0,i))
+      setLabel(text.substring(0,i)+selector)
       i++
     }, interval);
     return interId
   }
 
-  useEffect(()=>{
+  const lines = sequence.split("\n")
+
+  const welcome = ()=>{
+    log([...lines],100,1,null,40)
     
-    // log('I am fine !',100,1)
+  }
+  useEffect(()=>{
+    welcome()
+    // log(['I am fine !','Oh','juhu'],100,1,null,30)
   },[])
 
+  
 
   return (
     <>
