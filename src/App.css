@@ -10,6 +10,10 @@ body{
   user-select: none;
 }
 
+.label {
+  min-height: 2em;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
