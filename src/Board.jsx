@@ -6,8 +6,8 @@ function Board(){
     }
 
     return (
-        <div className="container align-items-center align-content-center" style={style}>
-            <div className="row row-cols-3">
+        <div className="container justify-content-center align-items-center align-content-center text-center" style={style}>
+            <div className="row row-cols-3 justify-content-center">
                 <Cell>
                     X
                 </Cell>
@@ -18,7 +18,7 @@ function Board(){
                     X
                 </Cell>
             </div>
-            <div className="row row-cols-3">
+            <div className="row row-cols-3 justify-content-center">
                 <Cell>
                     X
                 </Cell>
@@ -29,7 +29,7 @@ function Board(){
                     X
                 </Cell>
             </div>
-            <div className="row row-cols-3">
+            <div className="row row-cols-3 justify-content-center">
                 <Cell>
                     X
                 </Cell>
