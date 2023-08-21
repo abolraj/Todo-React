@@ -1,7 +1,7 @@
 function Label({children}){
 
     return (
-        <h2 className="border-bottom border-secondary border-2 text-secondary">
+        <h2 className="label border-bottom border-secondary border-2 text-secondary overflow-visible p-2">
             {children}
         </h2>
     )
