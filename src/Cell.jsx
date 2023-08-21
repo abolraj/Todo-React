@@ -1,7 +1,11 @@
 import { useState } from "react";
 
-function Cell({children}){
-    let [isX, setIsX] = useState(false)
+function Cell({children, state}){
+    let [isX, setIsX] = state
+
+    // const setIsX = (v) => {
+    //     isX = v
+    // }
 
     const style = {
     }
