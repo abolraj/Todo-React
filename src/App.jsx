@@ -2,20 +2,23 @@ import React, { useEffect, useState } from 'react'
 import './App.css'
 import Board from './Board'
 import Label from './Label'
+import Modal from './Modal'
 
 function App() {
   const [char, setChar] = useState('a')
   const [label, setLabel] = useState('🎮')
 
   const sequence = `
-  Hi !
-  Welcome to Todo Game 🎮
+  Hi 👋!
+  Welcome to Tic-Tac-Toe Game 🎮
   Developed by Abolfazl Rajaee nasab
   #react
   #bootstrap
   #html
   #css
-  #js`;
+  #js
+  😎
+  😉`;
 
   const log = (orgText, interval=200,clear=false, isEnded=null, cleanInterval=100) => {
     let i = 0
@@ -30,7 +33,6 @@ function App() {
       clearInterval(interId)
 
       setLabel('')
-      console.log('ended !')
       log(orgText, interval,clear, isEnded, cleanInterval)
       isEnded && isEnded()
     }
@@ -68,7 +70,7 @@ function App() {
     
   }
   useEffect(()=>{
-    welcome()
+    // welcome()
     // log(['I am fine !','Oh','juhu'],100,1,null,30)
   },[])
 
@@ -76,6 +78,7 @@ function App() {
 
   return (
     <>
+      <Modal/>
       <Label>
         {label}
       </Label>
