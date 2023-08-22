@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Cell from "./Cell";
 
-function Board() {
+function Board({isOnPlay}) {
     const style = {
 
     }
@@ -31,7 +31,7 @@ function Board() {
     }
 
     return (
-        <div className="container justify-content-center align-items-center align-content-center text-center" style={style}>
+        <div className={"container justify-content-center align-items-center align-content-center text-center " + (isOnPlay?'':'pe-none')} style={style}>
             <div className="row row-cols-3 justify-content-center">
                 <Cell state={cellsIsX[0]}>
                     X
