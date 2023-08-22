@@ -16,13 +16,12 @@ function Cell({children, state}){
     }
 
     const toggle = () => {
-        children = isX ? 'X' : 'O';
-        setIsX(!isX)
+        setIsX(+!isX)
     }
     
     return (
         <div className="text-center p-1 h1 user-select-none m-0 w-auto" style={style}>
-            <div onClick={toggle} className={"border border-3 rounded-4 p-4 p-sm-5 mx-auto d-flex align-items-center align-content-center justify-content-center "+( isX ? "border-primary text-primary":"border-danger text-danger")} style={childStyle}>
+            <div onClick={toggle} className={"border border-3 rounded-4 p-4 p-sm-4 mx-auto d-flex align-items-center align-content-center justify-content-center "+( isX ? "border-primary text-primary":"border-danger text-danger")} style={childStyle}>
                 {['O','X',''][isX]}
             </div>
         </div>
