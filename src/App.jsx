@@ -3,10 +3,17 @@ import './App.css'
 import Board from './Board'
 import Label from './Label'
 import Modal from './Modal'
+import Cell from './Cell'
+import Alert from './Alert'
 
 function App() {
   const [char, setChar] = useState('a')
   const [label, setLabel] = useState('🎮')
+  const [mode, setMode] = useState(1)
+  const [players, setPlayers] = useState([])
+  const [isOnPlay, setIsOnPlay] = useState(false)
+  const [order, setOrder] = useState(-1)
+  const [isXOrder, setIsXOrder] = useState(false)
 
   const sequence = `
   Hi 👋!
@@ -19,6 +26,13 @@ function App() {
   #js
   😎
   😉`;
+
+
+  const play = (data)=>{
+    setIsOnPlay(true)
+    setPlayers(data.players)
+    setMode(data.mode)
+  }
 
   const log = (orgText, interval=200,clear=false, isEnded=null, cleanInterval=100) => {
     let i = 0
@@ -74,15 +88,26 @@ function App() {
     // log(['I am fine !','Oh','juhu'],100,1,null,30)
   },[])
 
+  const guessCell = ()=>{
+
+  }
   
 
   return (
     <>
-      <Modal/>
+   
+      <Alert>
+        <Cell state={[0,v=>0]}/>
+        <strong class="h1 m-0 me-2">Ali,</strong>you can play now !
+      </Alert>
+
       <Label>
         {label}
       </Label>
-      <Board/>
+
+      <Board isOnPlay={isOnPlay}/>
+
+      <Modal onPlay={data => play(data)} isOnPlay={isOnPlay}/>
     </>
   )
 }
