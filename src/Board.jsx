@@ -7,9 +7,9 @@ function Board({isOnPlay}) {
     }
 
     let cellsIsX = [
-        1, 1, 1,
-        1, 1, 1,
-        1, 1, 1,
+        2, 2, 2,
+        2, 2, 2,
+        2, 2, 2,
     ]
 
     cellsIsX = cellsIsX.map(isX => useState(isX))
