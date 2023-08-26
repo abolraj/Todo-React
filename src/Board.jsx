@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Cell from "./Cell";
 
-function Board({isOnPlay}) {
+function Board({isOnPlay, playerOrder}) {
     const style = {
 
     }
@@ -12,7 +12,7 @@ function Board({isOnPlay}) {
         2, 2, 2,
     ]
 
-    cellsIsX = cellsIsX.map(isX => useState(isX))
+    cellsIsX = cellsIsX.map(isX => useState(isX).concat([playerOrder]))
 
     const load = ()=>{
         const queue = [0,1,2,5,4,3,6,7,8,5,4,3]
