@@ -127,7 +127,7 @@ function App() {
   return (
     <>
    
-      <Alert className={+!!isXOrder?"alert-primary":"alert-danger"}>
+      <Alert className={(+!!isXOrder?" alert-primary ":" alert-danger ") + (!isOnPlay && 'visually-hidden')}>
         <Cell state={[+!!isXOrder,v=>0]}/>
         <strong class="h1 m-0 ms-2 me-2 text-capitalize">
           {players[+!!isXOrder]},
