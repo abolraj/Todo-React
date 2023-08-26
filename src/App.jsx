@@ -13,7 +13,7 @@ function App() {
   const [players, setPlayers] = useState([])
   const [isOnPlay, setIsOnPlay] = useState(false)
   const [order, setOrder] = useState(-1)
-  const [isXOrder, setIsXOrder] = useState(false)
+  const [isXOrder, setIsXOrder] = useState(2)
 
   const sequence = `
   Hi 👋!
@@ -27,11 +27,41 @@ function App() {
   😎
   😉`;
 
+  const winPositions = [
+    [0,1,2], // row 1
+    [3,4,5], // row 2
+    [6,7,8], // row 3
+
+    [0,3,6], // column 1
+    [1,4,7], // column 2
+    [2,5,8], // column 3
+
+    [0,4,8], // diagonal 1
+    [6,4,2], // diagonal 2
+  ]
+
+  const onCellClick = () => {
+    setIsXOrder(isXOrder =>{
+      if( mode == 1 ){
+        if( isXOrder == 0 ){
+
+        }
+      }else if( mode == 2 ){
+
+      }
+      
+      
+      return +!isXOrder
+    })
+
+  }
 
   const play = (data)=>{
     setIsOnPlay(true)
     setPlayers(data.players)
     setMode(data.mode)
+    setIsXOrder(0)
+    console.log('play!')
   }
 
   const log = (orgText, interval=200,clear=false, isEnded=null, cleanInterval=100) => {
@@ -86,6 +116,7 @@ function App() {
   useEffect(()=>{
     // welcome()
     // log(['I am fine !','Oh','juhu'],100,1,null,30)
+    document.addEventListener('onCellClick', onCellClick.bind(this))
   },[])
 
   const guessCell = ()=>{
@@ -96,16 +127,21 @@ function App() {
   return (
     <>
    
-      <Alert>
-        <Cell state={[0,v=>0]}/>
-        <strong class="h1 m-0 me-2">Ali,</strong>you can play now !
+      <Alert className={+!!isXOrder?"alert-primary":"alert-danger"}>
+        <Cell state={[+!!isXOrder,v=>0]}/>
+        <strong class="h1 m-0 ms-2 me-2 text-capitalize">
+          {players[+!!isXOrder]},
+        </strong>
+        <p className="h5 m-0">
+          {mode*isXOrder==1 ? 'system is playing . . .':'you can play now !'}
+        </p>
       </Alert>
 
       <Label>
         {label}
       </Label>
 
-      <Board isOnPlay={isOnPlay}/>
+      <Board isOnPlay={isOnPlay} playerOrder={+isXOrder}/>
 
       <Modal onPlay={data => play(data)} isOnPlay={isOnPlay}/>
     </>
