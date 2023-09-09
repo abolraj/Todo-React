@@ -34,13 +34,14 @@ function App() {
   }
 
   const onCloseWinAlert = () => {
-    restart()
+    setTimeout(()=>restart(), 1000)
   }
 
   const onWin = (winner)=>{
+    console.log('winner '+winner)
     if(winner !== -1){
       // win a who !
-      setWinner(+!winner)
+      setWinner(winner)
     }
   }
 
@@ -132,8 +133,14 @@ function App() {
     <>
     
       <WinAlert isWin={winner!=-1} onClose={()=>onCloseWinAlert()}>
-        <Cell state={[+!winner,v=>0]}/>
-        <p class="m-1">,<span className={winner === 1 ?"text-danger":"text-primary"}>You</span> are winner 🎉🎊</p>
+        { winner === 2 ?
+          <p>No win, draw !</p>
+            :
+          <>
+            <Cell state={[+!!winner,v=>0]}/>
+            <p class="m-1">,<span className={winner === 0 ?"text-danger":"text-primary"}>{mode===1 && winner===1?'🧠':'You'}</span> {mode===1 && winner===1?'is winner 🤯😵':'are winner 🎉🎊'}</p>
+          </>
+        }
       </WinAlert>
 
       <Alert className={(+!!isXOrder?" alert-primary ":" alert-danger ") + (!isOnPlay && 'visually-hidden')}>
@@ -150,7 +157,7 @@ function App() {
         {label}
       </Label>
 
-      <Board isOnPlay={isOnPlay} playerOrder={+isXOrder} onWin={onWin.bind(this)}/>
+      <Board isOnPlay={isOnPlay} hasSystem={mode===1} playerOrder={+isXOrder} onWin={onWin.bind(this)}/>
 
       <Modal onPlay={data => play(data)} isOnPlay={isOnPlay}/>
     </>
