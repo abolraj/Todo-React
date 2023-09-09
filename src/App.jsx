@@ -5,6 +5,7 @@ import Label from './Label'
 import Modal from './Modal'
 import Cell from './Cell'
 import Alert from './Alert'
+import WinAlert from './WinAlert'
 
 function App() {
   const [char, setChar] = useState('a')
@@ -14,6 +15,7 @@ function App() {
   const [isOnPlay, setIsOnPlay] = useState(false)
   const [order, setOrder] = useState(-1)
   const [isXOrder, setIsXOrder] = useState(2)
+  const [winner, setWinner] = useState(-1)
 
   const sequence = `
   Hi 👋!
@@ -27,18 +29,20 @@ function App() {
   😎
   😉`;
 
-  const winPositions = [
-    [0,1,2], // row 1
-    [3,4,5], // row 2
-    [6,7,8], // row 3
+  const restart = () => {
+    window.location.reload()
+  }
 
-    [0,3,6], // column 1
-    [1,4,7], // column 2
-    [2,5,8], // column 3
+  const onCloseWinAlert = () => {
+    restart()
+  }
 
-    [0,4,8], // diagonal 1
-    [6,4,2], // diagonal 2
-  ]
+  const onWin = (winner)=>{
+    if(winner !== -1){
+      // win a who !
+      setWinner(+!winner)
+    }
+  }
 
   const onCellClick = () => {
     setIsXOrder(isXOrder =>{
@@ -126,7 +130,12 @@ function App() {
 
   return (
     <>
-   
+    
+      <WinAlert isWin={winner!=-1} onClose={()=>onCloseWinAlert()}>
+        <Cell state={[+!winner,v=>0]}/>
+        <p class="m-1">,<span className={winner === 1 ?"text-danger":"text-primary"}>You</span> are winner 🎉🎊</p>
+      </WinAlert>
+
       <Alert className={(+!!isXOrder?" alert-primary ":" alert-danger ") + (!isOnPlay && 'visually-hidden')}>
         <Cell state={[+!!isXOrder,v=>0]}/>
         <strong class="h1 m-0 ms-2 me-2 text-capitalize">
@@ -141,7 +150,7 @@ function App() {
         {label}
       </Label>
 
-      <Board isOnPlay={isOnPlay} playerOrder={+isXOrder}/>
+      <Board isOnPlay={isOnPlay} playerOrder={+isXOrder} onWin={onWin.bind(this)}/>
 
       <Modal onPlay={data => play(data)} isOnPlay={isOnPlay}/>
     </>
