@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Cell from "./Cell";
 
-function Board({isOnPlay, playerOrder, onWin}) {
+function Board({isOnPlay, playerOrder, onWin, hasSystem}) {
     const style = {
 
     }
@@ -27,14 +27,39 @@ function Board({isOnPlay, playerOrder, onWin}) {
     
     cellsIsX = cellsIsX.map(isX => useState(isX).concat([playerOrder]))
 
+    const answerAsSystem = () => {
+        // always system choice is X !
+        const fills = []
+        for(let line of winPositions){
+            const xes = line.filter(i=>cellsIsX[i][0]===1)
+            const xNo = xes.length
+            const yNo = line.filter(i=>cellsIsX[i][0]===0).length
+            if(Math.random()<.9 && yNo === 2 && xNo === 0) return line.find(v=>cellsIsX[v][0]===2)
+            // if(yNo > 0) continue
+            if(xNo === 2) return line.find(v=>cellsIsX[v][0]===2)
+            fills.push({line, xNo, yNo})
+        }
+
+        fills.sort((a,b) => b.xNo > a.xNo || a.yNo > b.yNo  ? -1 : 1)
+
+        const choice = fills[0]
+        return choice?.line && choice.line?.find(v=>cellsIsX[v][0]===2)
+    }
+
     const checkWinner = (playerOrder) => {
+        
         if(isOnPlay){
+            let isDraw = true
             for(const winPosition of winPositions) {
+                isDraw &&= !winPosition.some(v=>cellsIsX[v][0]===2)
                 if( cellsIsX[winPosition[0]][0] !==2 && cellsIsX[winPosition[0]][0] === cellsIsX[winPosition[1]][0] && cellsIsX[winPosition[0]][0] == cellsIsX[winPosition[2]][0] ){
                         return playerOrder
                 }
             }
+            if(isDraw)
+                return 2
         }
+
         return -1
     }
 
@@ -56,11 +81,19 @@ function Board({isOnPlay, playerOrder, onWin}) {
 
     useEffect(()=>{
         onWin(checkWinner(+!playerOrder))
+        if(hasSystem && playerOrder === 1){
+            let systemChoice = answerAsSystem()
+            if(systemChoice !== undefined){
+                setTimeout(()=>{
 
+                    document.querySelectorAll('.board .cell')[systemChoice].click()
+                },Math.max(Math.random()*1000, 200))
+            }
+        }
     },[playerOrder])
 
     return (
-        <div className={"container justify-content-center align-items-center align-content-center text-center " + (isOnPlay?'':'pe-none')} style={style}>
+        <div className={"board container justify-content-center align-items-center align-content-center text-center " + (isOnPlay && !(hasSystem && playerOrder===1) ?'':'pe-none')} style={style}>
             <div className="row row-cols-3 justify-content-center">
                 <Cell state={cellsIsX[0]}>
                     X
