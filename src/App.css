@@ -56,3 +56,15 @@ body{
 .read-the-docs {
   color: #888;
 }
+
+
+.win-alert {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 1050;
+}
+
+.win-alert-bg {
+  backdrop-filter: blur(10px);
+}
