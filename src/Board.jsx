@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Cell from "./Cell";
 
-function Board({isOnPlay, playerOrder}) {
+function Board({isOnPlay, playerOrder, onWin}) {
     const style = {
 
     }
@@ -12,7 +12,31 @@ function Board({isOnPlay, playerOrder}) {
         2, 2, 2,
     ]
 
+    const winPositions = [
+        [0,1,2], // row 1
+        [3,4,5], // row 2
+        [6,7,8], // row 3
+    
+        [0,3,6], // column 1
+        [1,4,7], // column 2
+        [2,5,8], // column 3
+    
+        [0,4,8], // diagonal 1
+        [6,4,2], // diagonal 2
+    ]
+    
     cellsIsX = cellsIsX.map(isX => useState(isX).concat([playerOrder]))
+
+    const checkWinner = (playerOrder) => {
+        if(isOnPlay){
+            for(const winPosition of winPositions) {
+                if( cellsIsX[winPosition[0]][0] !==2 && cellsIsX[winPosition[0]][0] === cellsIsX[winPosition[1]][0] && cellsIsX[winPosition[0]][0] == cellsIsX[winPosition[2]][0] ){
+                        return playerOrder
+                }
+            }
+        }
+        return -1
+    }
 
     const load = ()=>{
         const queue = [0,1,2,5,4,3,6,7,8,5,4,3]
@@ -29,6 +53,11 @@ function Board({isOnPlay, playerOrder}) {
         },100)
 
     }
+
+    useEffect(()=>{
+        onWin(checkWinner(+!playerOrder))
+
+    },[playerOrder])
 
     return (
         <div className={"container justify-content-center align-items-center align-content-center text-center " + (isOnPlay?'':'pe-none')} style={style}>
