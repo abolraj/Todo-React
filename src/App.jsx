@@ -6,6 +6,7 @@ import Modal from './Modal'
 import Cell from './Cell'
 import Alert from './Alert'
 import WinAlert from './WinAlert'
+import backgroundSound from '/sounds/background.mp3'
 
 function App() {
   const [char, setChar] = useState('a')
@@ -119,20 +120,22 @@ function App() {
     
   }
   useEffect(()=>{
-    // welcome()
-    // log(['I am fine !','Oh','juhu'],100,1,null,30)
+    document.body.addEventListener("click", function () {
+      new Audio(backgroundSound).play()
+    }, {once:true})
+    welcome()
+
     document.addEventListener('onCellClick', onCellClick.bind(this))
+    document.addEventListener('onPlayAgain', ()=>{
+      setWinner(-1)
+      setIsXOrder(0)
+    })
   },[])
-
-  const guessCell = ()=>{
-
-  }
   
-
   return (
     <>
     
-      <WinAlert isWin={winner!=-1} onClose={()=>onCloseWinAlert()}>
+      <WinAlert isWin={winner!==-1} onClose={()=>onCloseWinAlert()}>
         { winner === 2 ?
           <p>No win, draw !</p>
             :
@@ -153,7 +156,7 @@ function App() {
         </p>
       </Alert>
 
-      <Label>
+      <Label isOnPlay={isOnPlay}>
         {label}
       </Label>
 
