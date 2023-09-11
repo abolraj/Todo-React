@@ -1,4 +1,5 @@
 import { useState } from "react";
+import tapSound from '/sounds/tap.mp3'
 
 function Cell({state}){
     const [isX, setIsX, isXOrder] = state
@@ -15,6 +16,8 @@ function Cell({state}){
     }
 
     const toggle = (e) => {
+        if(isX!==2)return
+        new Audio(tapSound).play()
         setIsX(isXOrder)
         // dispatch on cell click event
         let event = new CustomEvent('onCellClick', e)
