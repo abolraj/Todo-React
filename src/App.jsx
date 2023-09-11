@@ -35,6 +35,7 @@ function App() {
   }
 
   const onCloseWinAlert = () => {
+    setWinner(-1)
     setTimeout(()=>restart(), 1000)
   }
 
@@ -141,7 +142,7 @@ function App() {
             :
           <>
             <Cell state={[+!!winner,v=>0]}/>
-            <p class="m-1">,<span className={winner === 0 ?"text-danger":"text-primary"}>{mode===1 && winner===1?'🧠':'You'}</span> {mode===1 && winner===1?'is winner 🤯😵':'are winner 🎉🎊'}</p>
+            <p class="m-1 pt-4">,<span className={winner === 0 ?"text-danger":"text-primary"}>{mode===1 && winner===1?'🧠':(players[winner]+' | You')}</span> {mode===1 && winner===1?'is winner 🤯😵':'are winner 🎉🎊'}</p>
           </>
         }
       </WinAlert>
