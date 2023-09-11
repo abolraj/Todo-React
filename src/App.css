@@ -68,3 +68,11 @@ body{
 .win-alert-bg {
   backdrop-filter: blur(10px);
 }
+
+.btn-try:hover .bi-arrow-clockwise {
+  transform: rotate(360deg);
+}
+
+.btn-try:hover .bi-arrow-clockwise {
+  transition: transform 500ms;
+}
