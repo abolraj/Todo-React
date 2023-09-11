@@ -15,7 +15,7 @@ I tried to have kindly ui and ux, and beaiful design to give users best emotions
 ![alt picture 3](./public/shots/3.png)
 
 ## System Answerer 🧠
-We used an algorithm to answer the user a randomly degree of hardness ...
+We used an algorithm to answer the user automaticly a randomly degree of hardness ...
 
 ## Techs Used to Develop 🧑‍💻🚀
 ### React Js (It's from my first react projects)
