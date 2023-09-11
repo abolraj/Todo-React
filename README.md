@@ -10,9 +10,9 @@ I tried to have kindly ui and ux, and beaiful design to give users best emotions
 4 - Close | Try again <br>
 
 ## Captures
-![alt picture 1](./public/shots/1.png)
-![alt picture 2](./public/shots/2.png)
-![alt picture 3](./public/shots/3.png)
+![alt picture 1](./shots/1.png)
+![alt picture 2](./shots/2.png)
+![alt picture 3](./shots/3.png)
 
 ## System Answerer 🧠
 We used an algorithm to answer the user automaticly a randomly degree of hardness ...
