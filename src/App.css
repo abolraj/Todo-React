@@ -69,10 +69,35 @@ body{
   backdrop-filter: blur(10px);
 }
 
+.btn-try {
+  backdrop-filter: blur(10px);
+  /* box-shadow: 0 0 10px black !important; */
+  background-color: #15151594;
+}
+
 .btn-try:hover .bi-arrow-clockwise {
   transform: rotate(360deg);
 }
 
 .btn-try:hover .bi-arrow-clockwise {
   transition: transform 500ms;
+}
+
+.win-alert-children .cell-co {
+  align-self: flex-start !important;
+
+  .cell {
+    box-shadow: 0 20px 0px 0px,
+    0 40px 0px 0px,
+    0 60px 0px 0px,
+    0 100px 0px 0px,
+    0 120px 0px 0px,
+    0 140px 0px 0px,
+    0 80px 0px 0px
+    ;
+  }
+}
+
+.win-alert-children p {
+  text-align: left;
 }

@@ -26,13 +26,13 @@ function WinAlert({ children, isWin, onClose, onPlayAgain }) {
                     <button onClick={_onClose.bind(this)} className="btn btn-close m-1" data-bs-dismiss="alert" aria-label="Close">
                         
                     </button>
-                    <button onClick={_onPlayAgain.bind(this)} className="btn-try btn btn-outline-primary position-absolute col-12 top-100 mt-2 start-0 p-2 rounded-5 shadow-none" data-bs-dismiss="alert">
+                    <button onClick={_onPlayAgain.bind(this)} className="btn-try btn btn-outline-primary position-absolute col-12 top-100 mt-2 start-0 p-2 rounded-5 shadow-lg" data-bs-dismiss="alert">
                         <p class="m-1 d-flex justify-content-between  align-items-center ps-3 pe-1 h2 ">
                             Try Again
                             <i class="bi bi-arrow-clockwise"></i>
                         </p>
                     </button>
-                    <div class="d-flex align-items-end">
+                    <div class="win-alert-children d-flex align-items-end">
                         {children}
                     </div>
                 </div>
